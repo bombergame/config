@@ -11,14 +11,23 @@ services:
 
   auth-service:
     image: "bombergame/auth-service"
+    depends_on:
+    - sessions-storage
     environment:
     - PROFILES_SERVICE_GRPC_ADDRESS=profiles-service:3000
+    - TOKEN_SIGN_KEY=${TOKEN_SIGN_KEY}
+    - SESSIONS_STORAGE_ADDRESS=sessions-storage:6379
+    - SESSION_EXPIRE_TIME=${SESSION_EXPIRE_TIME}
+
+  sessions-storage:
+    image: "redis:5.0.1"
 
   profiles-service:
     image: "bombergame/profiles-service"
     depends_on:
     - profiles-storage
     environment:
+    - AUTH_SERVICE_GRPC_ADDRESS=auth-service:3000
     - PROFILES_STORAGE_HOST=profiles-storage
     - PROFILES_STORAGE_PORT=5432
     - PROFILES_STORAGE_NAME=${PROFILES_STORAGE_NAME}
