@@ -3,3 +3,6 @@
 
 ### environment ###
 /.env
+
+### init script ###
+/init.sh
