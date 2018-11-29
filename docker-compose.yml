@@ -9,6 +9,14 @@ services:
     ports:
     - "${SERVICE_PORT}:80"
 
+  service-monitor:
+    image: "bombergame/service-monitor"
+    depends_on:
+    - auth-service
+    - profiles-service
+    ports:
+    - "${MONITOR_PORT}:9090"
+
   auth-service:
     image: "bombergame/auth-service"
     depends_on:
