@@ -1,9 +1,9 @@
 # config
 
-[![Build Status](https://travis-ci.com/bombergame/config.svg?branch=master)](https://travis-ci.com/bombergame/config)
+[![Build Status](https://travis-ci.com/bombergame/service-config.svg?branch=master)](https://travis-ci.com/bombergame/service-config)
 
 ## Service start
 
 ```
-docker-compose up
+sh ./start.sh
 ```
