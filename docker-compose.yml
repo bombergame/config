@@ -4,69 +4,69 @@ services:
   frontend:
     image: "bombergame/frontend"
     depends_on:
-      - gateway
+    - gateway
     ports:
-      - "${FRONTEND_PORT}:8000"
+    - "${FRONTEND_PORT}:8000"
 
   gateway:
     image: "bombergame/gateway"
     depends_on:
-      - auth-service
-      - profiles-service
+    - auth-service
+    - profiles-service
     ports:
-      - "${BACKEND_PORT}:80"
+    - "${BACKEND_PORT}:80"
 
   service-monitor:
     image: "bombergame/service-monitor"
     depends_on:
-      - auth-service
-      - profiles-service
+    - auth-service
+    - profiles-service
     ports:
-      - "${MONITOR_PORT}:9090"
+    - "${MONITOR_PORT}:9090"
 
   auth-service:
     image: "bombergame/auth-service"
     depends_on:
-      - sessions-storage
+    - sessions-storage
     environment:
-      - PROFILES_SERVICE_GRPC_HOST=profiles-service
-      - PROFILES_SERVICE_GRPC_PORT=3000
-      - TOKEN_SIGN_KEY=${TOKEN_SIGN_KEY}
-      - SESSIONS_STORAGE_USER=${SESSIONS_STORAGE_USER}
-      - SESSIONS_STORAGE_PASSWORD=${SESSIONS_STORAGE_PASSWORD}
-      - SESSIONS_STORAGE_NAME=${SESSIONS_STORAGE_NAME}
-      - SESSIONS_STORAGE_HOST=sessions-storage
-      - SESSIONS_STORAGE_PORT=3306
-      - SESSION_EXPIRE_TIME=${SESSION_EXPIRE_TIME}
+    - PROFILES_SERVICE_GRPC_HOST=profiles-service
+    - PROFILES_SERVICE_GRPC_PORT=3000
+    - TOKEN_SIGN_KEY=${TOKEN_SIGN_KEY}
+    - SESSIONS_STORAGE_USER=${SESSIONS_STORAGE_USER}
+    - SESSIONS_STORAGE_PASSWORD=${SESSIONS_STORAGE_PASSWORD}
+    - SESSIONS_STORAGE_NAME=${SESSIONS_STORAGE_NAME}
+    - SESSIONS_STORAGE_HOST=sessions-storage
+    - SESSIONS_STORAGE_PORT=3306
+    - SESSION_EXPIRE_TIME=${SESSION_EXPIRE_TIME}
 
   sessions-storage:
     image: "bombergame/sessions-storage"
     environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_DATABASE=${SESSIONS_STORAGE_NAME}
-      - MYSQL_USER=${SESSIONS_STORAGE_USER}
-      - MYSQL_PASSWORD=${SESSIONS_STORAGE_PASSWORD}
+    - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    - MYSQL_DATABASE=${SESSIONS_STORAGE_NAME}
+    - MYSQL_USER=${SESSIONS_STORAGE_USER}
+    - MYSQL_PASSWORD=${SESSIONS_STORAGE_PASSWORD}
 
   profiles-service:
     image: "bombergame/profiles-service"
     depends_on:
-      - profiles-storage
+    - profiles-storage
     environment:
-      - AUTH_SERVICE_GRPC_HOST=auth-service
-      - AUTH_SERVICE_GRPC_PORT=3000
-      - TOKEN_SIGN_KEY=${TOKEN_SIGN_KEY}
-      - PROFILES_STORAGE_HOST=profiles-storage
-      - PROFILES_STORAGE_PORT=5432
-      - PROFILES_STORAGE_NAME=${PROFILES_STORAGE_NAME}
-      - PROFILES_STORAGE_USER=${PROFILES_STORAGE_USER}
-      - PROFILES_STORAGE_PASSWORD=${PROFILES_STORAGE_PASSWORD}
+    - AUTH_SERVICE_GRPC_HOST=auth-service
+    - AUTH_SERVICE_GRPC_PORT=3000
+    - TOKEN_SIGN_KEY=${TOKEN_SIGN_KEY}
+    - PROFILES_STORAGE_HOST=profiles-storage
+    - PROFILES_STORAGE_PORT=5432
+    - PROFILES_STORAGE_NAME=${PROFILES_STORAGE_NAME}
+    - PROFILES_STORAGE_USER=${PROFILES_STORAGE_USER}
+    - PROFILES_STORAGE_PASSWORD=${PROFILES_STORAGE_PASSWORD}
 
   profiles-storage:
     image: "bombergame/profiles-storage"
     environment:
-      - POSTGRES_DB=${PROFILES_STORAGE_NAME}
-      - POSTGRES_USER=${PROFILES_STORAGE_USER}
-      - POSTGRES_PASSWORD=${PROFILES_STORAGE_PASSWORD}
+    - POSTGRES_DB=${PROFILES_STORAGE_NAME}
+    - POSTGRES_USER=${PROFILES_STORAGE_USER}
+    - POSTGRES_PASSWORD=${PROFILES_STORAGE_PASSWORD}
 
   multiplayer-service:
     image: "bombergame/multiplayer-service"
