@@ -67,3 +67,6 @@ services:
       - POSTGRES_DB=${PROFILES_STORAGE_NAME}
       - POSTGRES_USER=${PROFILES_STORAGE_USER}
       - POSTGRES_PASSWORD=${PROFILES_STORAGE_PASSWORD}
+
+  multiplayer-service:
+    image: "bombergame/multiplayer-service"
