@@ -1,20 +1,15 @@
 version: "3"
 
 services:
-  frontend:
-    image: "bombergame/frontend"
-    depends_on:
-    - gateway
-    ports:
-    - "${FRONTEND_PORT}:8000"
-
   gateway:
     image: "bombergame/gateway"
     depends_on:
     - auth-service
     - profiles-service
+    - multiplayer-service
     ports:
     - "${BACKEND_PORT}:80"
+    restart: always
 
   service-monitor:
     image: "bombergame/service-monitor"
@@ -70,3 +65,4 @@ services:
 
   multiplayer-service:
     image: "bombergame/multiplayer-service"
+    restart: always
