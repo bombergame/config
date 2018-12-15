@@ -6,3 +6,6 @@
 
 ### init script ###
 /init.sh
+
+### development ###
+/grafana/
