@@ -1,6 +1,14 @@
 version: "3"
 
 services:
+  frontend:
+    image: "bombergame/frontend"
+    depends_on:
+      - gateway
+    ports:
+      - "${FRONTEND_PORT}:80"
+    restart: always
+
   gateway:
     image: "bombergame/gateway"
     depends_on:
@@ -27,7 +35,7 @@ services:
     depends_on:
       - gateway
     ports:
-      - "${MONITOR_PORT}:9090"
+      - "${PROMETHEUS_PORT}:9090"
 
   auth-service:
     image: "bombergame/auth-service"
@@ -43,6 +51,7 @@ services:
       - SESSIONS_STORAGE_HOST=sessions-storage
       - SESSIONS_STORAGE_PORT=3306
       - SESSION_EXPIRE_TIME=${SESSION_EXPIRE_TIME}
+    restart: always
 
   sessions-storage:
     image: "bombergame/sessions-storage"
@@ -51,6 +60,7 @@ services:
       - MYSQL_DATABASE=${SESSIONS_STORAGE_NAME}
       - MYSQL_USER=${SESSIONS_STORAGE_USER}
       - MYSQL_PASSWORD=${SESSIONS_STORAGE_PASSWORD}
+    restart: always
 
   profiles-service:
     image: "bombergame/profiles-service"
@@ -65,6 +75,7 @@ services:
       - PROFILES_STORAGE_NAME=${PROFILES_STORAGE_NAME}
       - PROFILES_STORAGE_USER=${PROFILES_STORAGE_USER}
       - PROFILES_STORAGE_PASSWORD=${PROFILES_STORAGE_PASSWORD}
+    restart: always
 
   profiles-storage:
     image: "bombergame/profiles-storage"
@@ -72,6 +83,7 @@ services:
       - POSTGRES_DB=${PROFILES_STORAGE_NAME}
       - POSTGRES_USER=${PROFILES_STORAGE_USER}
       - POSTGRES_PASSWORD=${PROFILES_STORAGE_PASSWORD}
+    restart: always
 
   multiplayer-service:
     image: "bombergame/multiplayer-service"
