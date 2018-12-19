@@ -31,8 +31,6 @@ services:
       - service-monitor-prometheus
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
-    volumes:
-      - "${GRAFANA_VOLUME}:/var/lib/grafana"
     ports:
       - "${GRAFANA_PORT}:3000"
 
