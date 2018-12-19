@@ -22,7 +22,7 @@ services:
   registry:
     image: "consul:1.4.0"
     ports:
-      - "${REGISTRY_PORT}:8500}
+      - "${REGISTRY_PORT}:8500"
     restart: always
 
   service-monitor-grafana:
