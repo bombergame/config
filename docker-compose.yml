@@ -30,9 +30,12 @@ services:
     depends_on:
       - service-monitor-prometheus
     environment:
+      - GF_SERVER_DOMAIN=bombich.ru
+      - GF_SERVER_ROOT_URL=http://bombich.ru/monitor/
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
     ports:
       - "${GRAFANA_PORT}:3000"
+    restart: always
 
   service-monitor-prometheus:
     image: "bombergame/service-monitor"
@@ -40,6 +43,7 @@ services:
       - gateway
     ports:
       - "${PROMETHEUS_PORT}:9090"
+    restart: always
 
   auth-service:
     image: "bombergame/auth-service"
