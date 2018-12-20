@@ -1,8 +1,9 @@
 #!/bin/sh
 
-dir="$1"
+src_dir="$1"
+dst_dir="$2"
 
-echo ${DATA_PASSWORD} | gpg -d -o ${dir}/args.tar.gz \
-        --passphrase-fd 0 ${dir}/args.tar.gz.gpg &&
-    tar -xzf ${dir}/args.tar.gz &&
-    rm ${dir}/args.tar.gz
+echo ${DATA_PASSWORD} | gpg -d -o ${dst_dir}/args.tar.gz \
+        --passphrase-fd 0 ${src_dir}/args.tar.gz.gpg &&
+    tar -xzf ${dst_dir}/args.tar.gz &&
+    rm ${dst_dir}/args.tar.gz
