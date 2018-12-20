@@ -4,4 +4,4 @@
 ### private ###
 .env
 *.pem
-*.tar
+*.tar.gz
