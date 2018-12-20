@@ -1,11 +1,6 @@
 ### GoLand ###
-/.idea/
+.idea
 
-### environment ###
-/.env
-
-### init script ###
-/init.sh
-
-### development ###
-/grafana/
+### private ###
+.env
+*.pem
