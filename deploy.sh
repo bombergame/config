@@ -6,4 +6,5 @@ export DOCKER_CERT_PATH=${TRAVIS_BUILD_DIR}
 export DOCKER_HOST=tcp://${SERVER_HOST}:${SERVER_PORT}
 
 ./service-config/decrypt.sh . . &&
-  docker-compose pull && docker-compose up -d
+  docker-compose -p bombergame pull &&
+  docker-compose -p bombergame up -d
